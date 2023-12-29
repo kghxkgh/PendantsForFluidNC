@@ -152,6 +152,7 @@ public:
         if (_continuous) {
             if (delta != 0) {
                 feedRateRotator(_cont_speed[_axis], delta > 0);
+                reDisplay();
             }
         } else {
             String enc_msg = "delta: " + String(delta);
