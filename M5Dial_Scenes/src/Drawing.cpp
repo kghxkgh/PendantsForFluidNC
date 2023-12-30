@@ -149,7 +149,7 @@ void drawMenuView(std::vector<String> labels, int start, int selected) {}
 void showImageFile(const char* name, int x, int y, int width, int height) {
     auto file = LittleFS.open(name);
     if (!file) {
-        debugPort.println("Can't open logo_img.bin");
+        log_println("Can't open logo_img.bin");
         return;
     }
     auto      len   = file.size();

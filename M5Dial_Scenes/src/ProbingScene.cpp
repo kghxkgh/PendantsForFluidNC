@@ -28,7 +28,7 @@ public:
             gcode += "F" + floatToString(_rate, 0);
             gcode += axisNumToString(_axis) + floatToString(_travel, 0);
             gcode += "P" + floatToString(_offset, 2);
-            debugPort.println(gcode);
+            log_println(gcode);
             send_line(gcode);
             return;
         }

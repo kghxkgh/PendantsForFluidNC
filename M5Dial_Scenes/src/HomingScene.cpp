@@ -18,7 +18,7 @@ public:
             if (_current_button != 0) {
                 line += axisNumToString(_current_button - 1);
             }
-            log_msg(line);
+            log_println(line);
             send_line(line);
         }
     }

@@ -4,7 +4,8 @@
 #pragma once
 
 // #define DEBUG_TO_FNC
-#define DEBUG_TO_USB
+// #define DEBUG_TO_USB
+// ECHO_FNC_TO_DEBUG
 
 #include <Arduino.h>
 #include <LittleFS.h>
@@ -23,4 +24,6 @@ String M5TouchStateName(m5::touch_state_t state_num);
 
 void init_system();
 
-void log_msg(const String& s);
+void log_write(uint8_t c);
+void log_print(const String& s);
+void log_println(const String& s);

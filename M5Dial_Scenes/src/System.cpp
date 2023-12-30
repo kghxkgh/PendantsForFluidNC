@@ -31,19 +31,33 @@ void init_system() {
     touch.setFlickThresh(30);
 
     if (!LittleFS.begin(FORMAT_LITTLEFS_IF_FAILED)) {
-        debugPort.println("LittleFS Mount Failed");
+        log_println("LittleFS Mount Failed");
         return;
     }
-    debugPort.println("LittleFS Mounted");
+    log_println("LittleFS Mounted");
     canvas.createSprite(display.width(), display.height());
 }
 
-void log_msg(const String& s) {
+void log_write(uint8_t c) {
+#ifdef DEBUG_TO_USB
+    if (debugPort.availableForWrite() > 1) {
+        debugPort.write(c);
+    }
+#endif
+}
+
+void log_print(const String& s) {
 #ifdef DEBUG_TO_FNC
     extern void send_line(const String& s, int timeout = 2000);
     send_line("$Msg/Uart0=" + s);
 #endif
 #ifdef DEBUG_TO_USB
-    debugPort.println(s);
+    if (debugPort.availableForWrite() > s.length()) {
+        debugPort.println(s);
+    }
 #endif
+}
+
+void log_println(const String& s) {
+    log_print(s + "\r\n");
 }
