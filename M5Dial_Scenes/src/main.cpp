@@ -20,11 +20,23 @@ HardwareSerial Serial_FNC(1);  // Serial port for comm with FNC
 void drawSplashScreen() {
     display.clear();
     display.fillScreen(BLACK);
-    //display.drawPngFile(LittleFS, "/fnc_logo.png", 0, 0, display.width(), display.height(), 0, 0, 0.0f, 0.0f, datum_t::middle_center);
+    
+    display.setTextColor(WHITE);
+    display.setTextDatum(middle_center);
+    
     display.drawPngFile(LittleFS, "/fluid_dial.png", 0, 0, display.width(), display.height(), 0, 0, 0.0f, 0.0f, datum_t::middle_center);
-    centered_text("Fluid Dial", 36, BLACK, SMALL);
-    centered_text("Pendant", 65, BLACK, SMALL);
-    centered_text("B. Dring", 190, BLACK, SMALL);
+    
+    // draw after the .png as it needs to go on top of the image
+    display.setFont(&fonts::FreeSansBold9pt7b);
+    display.drawString("version", 120, 15);
+    display.drawString(__DATE__, 120, 35);
+    display.drawString(__TIME__, 120, 55);
+
+    display.setFont(&fonts::FreeSansBold12pt7b);
+    display.drawString("Pendant", 120, 180);
+
+    display.setFont(&fonts::FreeSansBold9pt7b);
+    display.drawString("B.Dring", 120, 210);
 }
 
 void DRO::draw(int axis, bool highlight) {
