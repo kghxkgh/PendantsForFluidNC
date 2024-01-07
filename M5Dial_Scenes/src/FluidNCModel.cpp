@@ -6,6 +6,7 @@
 #include "System.h"
 
 // local copies of status items
+String             conectionState     = "N/C";
 String             stateString        = "N/C";
 state_t            state              = Idle;
 pos_t              myAxes[6]          = { 0 };
@@ -38,6 +39,15 @@ void decode_state_string(const char* state_string) {
     if (stateString != state_string) {
         stateString = state_string;
         state       = state_map[stateString];
+    }
+}
+
+bool force_state_change() {
+    if (conectionState == "N/C" && state == Idle) {
+        conectionState = "conected";
+        return true;
+    }else {
+        return false;
     }
 }
 

@@ -53,7 +53,7 @@ extern "C" void show_error(int error) {
 extern "C" void show_state(const char* state_string) {
     static state_t old_state = Idle;
     decode_state_string(state_string);
-    if (state != old_state) {
+    if (state != old_state || force_state_change()) {
         current_scene->onStateChange(state);
         old_state = state;
     }
@@ -71,6 +71,11 @@ extern "C" void end_status_report() {
 extern "C" void show_alarm(int alarm) {
     lastAlarm = alarm;
     current_scene->reDisplay();
+}
+
+extern "C" void show_timeout() {
+    log_println("\r\nFluidNC serial conection timeout");
+    show_state("N/C");
 }
 
 extern "C" void show_gcode_modes(struct gcode_modes* modes) {
