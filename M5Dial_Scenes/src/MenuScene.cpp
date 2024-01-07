@@ -31,6 +31,7 @@ extern Scene statusScene;
 extern Scene filesScene;
 extern Scene controlScene;
 extern Scene setupScene;
+extern Scene extraScene;
 
 Item* statusButton;
 Item* homingButton;
@@ -39,7 +40,7 @@ Item* probeButton;
 Item* filesButton;
 Item* controlButton;
 Item* setupButton;
-Item* powerButton;
+Item* extraButton;
 
 Scene* initMenus() {
     // fileMenu.addItem(new FileItem("BigTree.nc"));
@@ -63,8 +64,8 @@ Scene* initMenus() {
     filesButton   = new IB("Files", &filesScene, "/filestp.png");
     controlButton = new IB("Control", &controlScene, "/controltp.png");
     setupButton   = new IB("Setup", &setupScene, "/setuptp.png");
-    powerButton   = new IB("Power", noop, "/powertp.png");
-    powerButton->disable();
+    extraButton   = new IB("Power", &extraScene, "/moretp.png");
+    //powerButton->disable();
 
     menuScene.addItem(statusButton);
     menuScene.addItem(homingButton);
@@ -73,7 +74,7 @@ Scene* initMenus() {
     menuScene.addItem(filesButton);
     menuScene.addItem(controlButton);
     menuScene.addItem(setupButton);
-    menuScene.addItem(powerButton);
+    menuScene.addItem(extraButton);
 
     return &menuScene;
 }

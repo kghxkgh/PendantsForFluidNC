@@ -8,6 +8,7 @@
 #include "FluidNCModel.h"
 #include "Scene.h"
 #include "Menu.h"
+#include "Ota.h"
 
 constexpr static const int RED_BUTTON_PIN   = GPIO_NUM_13;
 constexpr static const int GREEN_BUTTON_PIN = GPIO_NUM_15;
@@ -135,6 +136,7 @@ void listDir(fs::FS& fs, const char* dirname, uint8_t levels) {
 
 void setup() {
     init_system();
+    init_ota();
 
     greenButton.init(GREEN_BUTTON_PIN, true);
     redButton.init(RED_BUTTON_PIN, true);
@@ -171,5 +173,10 @@ void loop() {
 
     while (Serial_FNC.available()) {
         fnc_poll();  // Handle messages from FluidNC
+    }
+
+    // assumption wifi will only be used for this purpose.
+    if (WiFi.status() == WL_CONNECTED) {
+        ArduinoOTA.handle();  // Handle messages from OTA    
     }
 }
