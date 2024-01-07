@@ -28,7 +28,7 @@ public:
     }
     void onRedButtonPress() {
         if (state == Homing || state == Cycle) {
-            fnc_realtime(FeedHold);
+            fnc_realtime(Reset);
         }
     }
 
